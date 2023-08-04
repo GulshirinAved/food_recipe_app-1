@@ -5,6 +5,7 @@ import 'package:food_recipe_app/app/core/colors.dart';
 import 'package:food_recipe_app/app/core/constants.dart';
 import 'package:food_recipe_app/app/modules/my_own_recipe/controllers/my_own_recipe_controller.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:food_recipe_app/app/widgets/buttons/favButton.dart';
 import 'package:food_recipe_app/app/widgets/card/stack_dialog.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,6 +21,7 @@ class UserImageProfileView extends GetView<UserImageProfileController> {
   String instruction;
   int index;
   bool needToCancel;
+  List imageList;
   UserImageProfileView({
     Key? key,
     required this.imageUrl,
@@ -28,6 +30,7 @@ class UserImageProfileView extends GetView<UserImageProfileController> {
     required this.instruction,
     required this.index,
     required this.needToCancel,
+    required this.imageList,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -52,9 +55,23 @@ class UserImageProfileView extends GetView<UserImageProfileController> {
         key: key,
         overlayStyle: ExpandableFabOverlayStyle(blur: 5),
         children: [
+          FavButton(
+            imageUrl: imageUrl,
+            ingredient: ingredient,
+            istruction: instruction,
+            name: foodName,
+            video: '',
+            imageList: imageList.first,
+            imageForFav: [imageUrl],
+            backgroundIcon: AppColors().lilyColor1.withOpacity(.5),
+            heartColor: AppColors().whiteColor,
+            height: 40,
+            width: 40,
+          ),
           FloatingActionButton.small(
             heroTag: 'first',
             backgroundColor: AppColors().lilyColor1.withOpacity(.5),
+            shape: const CircleBorder(),
             onPressed: () {
               _showDialog(context, instruction);
             },
@@ -66,6 +83,7 @@ class UserImageProfileView extends GetView<UserImageProfileController> {
           FloatingActionButton.small(
             heroTag: 'second',
             backgroundColor: AppColors().lilyColor1.withOpacity(.5),
+            shape: const CircleBorder(),
             onPressed: () {
               _showDialog(context, ingredient);
             },

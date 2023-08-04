@@ -14,10 +14,9 @@ void main() async {
   await GetStorage.init();
   await Firebase.initializeApp();
   await ScreenUtil.ensureScreenSize();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-     
       statusBarIconBrightness: Brightness.light,
     ),
   );

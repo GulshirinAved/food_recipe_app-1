@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +11,6 @@ import 'package:food_recipe_app/app/widgets/animations.dart';
 import 'package:food_recipe_app/app/widgets/buttons/favButton.dart';
 import 'package:food_recipe_app/app/widgets/text_for_home_page.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 
 import '../../../widgets/app_bar/app_bar_for_category.dart';
 import '../controllers/image_profile_controller.dart';
@@ -49,16 +45,7 @@ class ImageProfileView extends GetView<ImageProfileController> {
           false,
           imageName.toUpperCase(),
           () async {
-            // Share.shareFiles([imageUrl], text: 'Great picture');
-            final urlimage = imageUrl;
-            final url = Uri.parse(urlimage);
-            final response = await http.get(url);
-            final bytes = response.bodyBytes;
-
-            final temp = await getTemporaryDirectory();
-            final path = '${temp.path}/image.png';
-            File(path).writeAsBytesSync(bytes);
-            await Share.shareFiles([path], text: ingredient);
+            await Share.share('Ingredient:\n$ingredient\n Instrutuction:\n$instruction');
           },
           IconlyLight.send,
         ),
@@ -92,20 +79,29 @@ class ImageProfileView extends GetView<ImageProfileController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => VideoPlayerView(title: imageName.toUpperCase(), video: video));
-                            },
-                            child: playAnimation(),
-                          ),
-                          FavButton(
-                            imageUrl: imageUrl,
-                            ingredient: ingredient,
-                            istruction: instruction,
-                            name: imageName,
-                            video: video,
-                            imageList: imageList[0],
-                            imageForFav: imageList,
+                          video != ''
+                              ? GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => VideoPlayerView(title: imageName.toUpperCase(), video: video));
+                                  },
+                                  child: playAnimation(),
+                                )
+                              : const SizedBox.shrink(),
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FavButton(
+                              imageUrl: imageUrl,
+                              ingredient: ingredient,
+                              istruction: instruction,
+                              name: imageName,
+                              video: video,
+                              imageList: imageList[0],
+                              imageForFav: imageList,
+                              backgroundIcon: AppColors().lilyColor1.withOpacity(.2),
+                              heartColor: AppColors().lilyColor1,
+                              height: 36,
+                              width: 37,
+                            ),
                           ),
                         ],
                       ),

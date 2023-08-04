@@ -53,7 +53,7 @@ Column cardForVideoAllView(
       ),
       textForHomePage(
         context,
-        title,
+        title.toUpperCase(),
         16,
         false,
         Theme.of(context).colorScheme.onSecondary,

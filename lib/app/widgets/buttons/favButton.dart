@@ -15,8 +15,25 @@ class FavButton extends StatefulWidget {
   final String video;
   final String imageList;
   final List imageForFav;
+  final Color backgroundIcon;
+  final Color heartColor;
+  final double height;
+  final double width;
 
-  const FavButton({super.key, required this.imageUrl, required this.ingredient, required this.istruction, required this.name, required this.video, required this.imageList, required this.imageForFav});
+  const FavButton({
+    super.key,
+    required this.imageUrl,
+    required this.ingredient,
+    required this.istruction,
+    required this.name,
+    required this.video,
+    required this.imageList,
+    required this.imageForFav,
+    required this.backgroundIcon,
+    required this.heartColor,
+    required this.height,
+    required this.width,
+  });
 
   @override
   State<FavButton> createState() => _FavButtonState();
@@ -73,13 +90,13 @@ class _FavButtonState extends State<FavButton> {
         setState(() {});
       },
       child: Container(
-        height: 36,
-        width: 37,
-        decoration: BoxDecoration(color: AppColors().lilyColor1.withOpacity(.2), borderRadius: borderRadius30),
+        height: widget.height,
+        width: widget.width,
+        decoration: BoxDecoration(color: widget.backgroundIcon, borderRadius: borderRadius30),
         child: Icon(
           value ? IconlyBold.heart : IconlyLight.heart,
           size: 22,
-          color: AppColors().lilyColor1,
+          color: widget.heartColor,
         ),
       ),
     );

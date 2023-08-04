@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_recipe_app/app/modules/video_player/controllers/video_player_controller.dart';
-import 'package:food_recipe_app/app/widgets/animations.dart';
 import 'package:food_recipe_app/app/widgets/app_bar/appbar_home_page.dart';
 import 'package:get/get.dart';
 
 import 'package:chewie/chewie.dart';
+
+import '../../../widgets/animations.dart';
 
 class VideoPlayerView extends StatefulWidget {
   final String video;

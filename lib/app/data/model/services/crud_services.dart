@@ -65,6 +65,7 @@ class CrudMethods {
             ingredient: data1[index]['listofProducts'],
             instruction: data1[index]['howToCook'],
             needToCancel: false,
+            imageList: [data1[index]['imageUrl']],
           ),
         );
       },
